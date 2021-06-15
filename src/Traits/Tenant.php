@@ -2,7 +2,7 @@
 namespace Windward\EloquentTenant\Traits;
 
 use Illuminate\Support\Str;
-use Windward\EloquentTenant\Tenant as EloquentTenantFacade;
+use Windward\EloquentTenant\EloquentTenantFacade;
 
 trait Tenant
 {

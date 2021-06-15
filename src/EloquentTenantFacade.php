@@ -4,9 +4,6 @@ namespace Windward\EloquentTenant;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @see \MindEdge\EloquentTenant\Skeleton\SkeletonClass
- */
 class EloquentTenantFacade extends Facade
 {
     /**
