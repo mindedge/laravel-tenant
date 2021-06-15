@@ -1,6 +1,6 @@
 <?php
 
-namespace MindEdge\EloquentTenant;
+namespace Windward\EloquentTenant;
 
 class EloquentTenant
 {

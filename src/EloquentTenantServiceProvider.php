@@ -1,6 +1,6 @@
 <?php
 
-namespace MindEdge\EloquentTenant;
+namespace Windward\EloquentTenant;
 
 use Illuminate\Support\ServiceProvider;
 
