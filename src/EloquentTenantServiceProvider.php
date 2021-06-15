@@ -19,8 +19,8 @@ class EloquentTenantServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Tenant::class,function($app){
-            $tenant = new Tenant();
+        $this->app->singleton(TenantMap::class,function($app){
+            $tenant = new TenantMap();
             $tenant->setCurrent($tenant->getConnections()[0]);
             return $tenant;
         });

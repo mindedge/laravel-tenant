@@ -46,7 +46,7 @@
                 "Windward\\EloquentTenant\\EloquentTenantServiceProvider"
             ],
             "aliases": {
-                "EloquentTenant": "Windward\\EloquentTenant\\EloquentTenantFacade"
+                "Tenant": "Windward\\EloquentTenant\\EloquentTenantFacade"
             }
         }
     }

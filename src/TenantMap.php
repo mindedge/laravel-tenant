@@ -7,7 +7,7 @@ namespace Windward\EloquentTenant;
 
 use Illuminate\Support\Facades\Config;
 
-Class Tenant {
+Class TenantMap {
     //Resolve .env strings into arrays
     private $USER_HOSTS = [];
     private $USER_PORTS = [];

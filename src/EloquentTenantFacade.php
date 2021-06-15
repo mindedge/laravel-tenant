@@ -16,6 +16,6 @@ class EloquentTenantFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return Tenant::class;
+        return TenantMap::class;
     }
 }
