@@ -8,6 +8,8 @@ namespace Windward\EloquentTenant;
 use Illuminate\Support\Facades\Config;
 
 Class TenantMap {
+    private $DRIVER = 'pgsql';
+
     //Resolve .env strings into arrays
     private $USER_HOSTS = [];
     private $USER_PORTS = [];
@@ -20,6 +22,7 @@ Class TenantMap {
 
     public function __construct( )
     {
+        $this->DRIVER = \Config::get('database.default');
 
         // Resolve .env strings into arrays
         $this->USER_HOSTS = array_map('trim', explode(',', \Config::get('app.userdb.host')));
@@ -32,6 +35,7 @@ Class TenantMap {
 
         // Add new user database connections at runtime
         foreach($connections as $key => $connection) {
+
             Config::set("database.connections.{$key}", $connection);
             //DB::purge($key);
         }
@@ -69,7 +73,7 @@ Class TenantMap {
 
         foreach($this->USER_HOSTS as $key => $HOST) {
             $USER_CONNECTIONS[$this->CONNECTION_PREFIX . sha1($HOST)] = [
-                'driver' => 'pgsql',
+                'driver' => $this->DRIVER,
                 'host' => $HOST,
                 'port' => $this->USER_PORTS[$key],
                 'database' => $this->USER_DATABASES[$key],
