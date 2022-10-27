@@ -1,53 +1,52 @@
 {
-    "name": "windward/eloquent-tenant",
-    "description": "Simple trait to enable multi-tenant models",
-    "keywords": [
-        "windward",
-        "eloquent-tenant"
-    ],
-    "license": "MIT",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Jacob Rogaishio",
-            "email": "me@jacobrogaishio.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "illuminate/support": "^9.0"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^7.0",
-        "phpunit/phpunit": "^9.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Windward\\EloquentTenant\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Windward\\EloquentTenant\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Windward\\EloquentTenant\\EloquentTenantServiceProvider"
-            ],
-            "aliases": {
-                "Tenant": "Windward\\EloquentTenant\\EloquentTenantFacade"
-            }
-        }
+  "name": "windward/eloquent-tenant",
+  "description": "Simple trait to enable multi-tenant models",
+  "keywords": [
+    "windward",
+    "eloquent-tenant"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Jacob Rogaishio",
+      "email": "me@jacobrogaishio.com",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^9.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^7.0",
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Windward\\EloquentTenant\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Windward\\EloquentTenant\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Windward\\EloquentTenant\\EloquentTenantServiceProvider"
+      ],
+      "aliases": {
+        "Tenant": "Windward\\EloquentTenant\\EloquentTenantFacade"
+      }
+    }
+  }
 }
