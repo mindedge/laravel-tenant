@@ -1,8 +1,9 @@
 {
-  "name": "windward/eloquent-tenant",
+  "name": "mindedge/eloquent-tenant",
   "description": "Simple trait to enable multi-tenant models",
   "keywords": [
-    "windward",
+    "mindedge",
+    "laravel",
     "eloquent-tenant"
   ],
   "license": "MIT",
@@ -24,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Windward\\EloquentTenant\\": "src"
+      "MindEdge\\EloquentTenant\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Windward\\EloquentTenant\\Tests\\": "tests"
+      "MindEdge\\EloquentTenant\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -42,11 +43,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Windward\\EloquentTenant\\EloquentTenantServiceProvider"
-      ],
-      "aliases": {
-        "Tenant": "Windward\\EloquentTenant\\EloquentTenantFacade"
-      }
+        "MindEdge\\EloquentTenant\\EloquentTenantServiceProvider"
+      ]
     }
   }
 }
