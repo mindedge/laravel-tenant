@@ -11,7 +11,9 @@ class EloquentTenantServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__ . '/../config/tenant.php' => config_path('tenant.php'),
+        ]);
     }
 
     /**
@@ -19,7 +21,12 @@ class EloquentTenantServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(TenantMap::class,function($app){
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/tenant.php',
+            'tenant'
+        );
+
+        $this->app->singleton(TenantMap::class, function ($app) {
             $tenant = new TenantMap();
             // TODO: Have this read out / be set from the database or somewhere
             $tenant->setCurrent($tenant->getConnections()[0]);
