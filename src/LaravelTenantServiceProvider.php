@@ -28,8 +28,7 @@ class LaravelTenantServiceProvider extends ServiceProvider
 
         $this->app->singleton(TenantMap::class, function ($app) {
             $tenant = new TenantMap();
-            // TODO: Have this read out / be set from the database or somewhere
-            $tenant->setCurrent(0);
+
             return $tenant;
         });
     }

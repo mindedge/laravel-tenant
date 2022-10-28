@@ -14,7 +14,7 @@ class TenantMap
 {
     private $TENANTS = [];
 
-    private $CURRENT = null;
+    private $CURRENT = 0;
     private $CONFIG_PREFIX = "tenant.";
 
     public function __construct()
@@ -30,6 +30,16 @@ class TenantMap
                 Config::set("filesystems.disks.{$key}", $tenant['filesystem']);
             }
         }
+    }
+
+    /**
+     * Gets the current tenant index
+     *
+     * @return int
+     */
+    public function getCurrent(): int|null
+    {
+        return $this->CURRENT;
     }
 
     /**
@@ -68,7 +78,7 @@ class TenantMap
         if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['db'])) {
             return $this->CONFIG_PREFIX . $this->CURRENT;
         } else {
-            throw new Exception("No filesystem exists for tenant index {$this->CURRENT}");
+            throw new Exception("No database exists for tenant index {$this->CURRENT}");
         }
     }
 
@@ -83,6 +93,23 @@ class TenantMap
         $dbs = [];
         foreach ($this->TENANTS as $index => $tenant) {
             if (!empty($tenant['db'])) {
+                $dbs[] = $index;
+            }
+        }
+
+        return $dbs;
+    }
+
+    /**
+     * Get a list of all filesystem keys for Storage disk() statements
+     *
+     * @return Array list of filesystems
+     */
+    public function getFilesystems()
+    {
+        $dbs = [];
+        foreach ($this->TENANTS as $index => $tenant) {
+            if (!empty($tenant['filesystem'])) {
                 $dbs[] = $index;
             }
         }
