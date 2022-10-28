@@ -1,7 +1,7 @@
 <?php
-namespace Windward\EloquentTenant\Traits;
 
-use Illuminate\Support\Str;
+namespace Windward\LaravelTenant\Traits;
+
 use Windward\EloquentTenant\EloquentTenantFacade;
 
 trait Tenant
@@ -9,6 +9,6 @@ trait Tenant
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
-        $this->connection = EloquentTenantFacade::getCurrent();
+        $this->connection = LaravelTenantFacade::getCurrent();
     }
 }

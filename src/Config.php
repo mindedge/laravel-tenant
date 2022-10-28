@@ -5,7 +5,7 @@
  *
  */
 
-namespace Windward\EloquentTenant;
+namespace Windward\LaravelTenant;
 
 class Config
 {

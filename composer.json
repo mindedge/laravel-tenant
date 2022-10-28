@@ -1,10 +1,10 @@
 {
-  "name": "windward/eloquent-tenant",
+  "name": "windward/laravel-tenant",
   "description": "Simple trait to enable multi-tenant models",
   "keywords": [
     "windward",
     "laravel",
-    "eloquent-tenant"
+    "laravel-tenant"
   ],
   "license": "MIT",
   "type": "library",
@@ -25,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Windward\\EloquentTenant\\": "src"
+      "Windward\\LaravelTenant\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Windward\\EloquentTenant\\Tests\\": "tests"
+      "Windward\\LaravelTenant\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -43,7 +43,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Windward\\EloquentTenant\\EloquentTenantServiceProvider"
+        "Windward\\LaravelTenant\\LaravelTenantServiceProvider"
       ]
     }
   }

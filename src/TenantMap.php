@@ -5,7 +5,7 @@
  *
  */
 
-namespace Windward\EloquentTenant;
+namespace Windward\LaravelTenant;
 
 use Illuminate\Support\Facades\Config;
 

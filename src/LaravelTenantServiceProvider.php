@@ -1,10 +1,10 @@
 <?php
 
-namespace Windward\EloquentTenant;
+namespace Windward\LaravelTenant;
 
 use Illuminate\Support\ServiceProvider;
 
-class EloquentTenantServiceProvider extends ServiceProvider
+class LaravelTenantServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
