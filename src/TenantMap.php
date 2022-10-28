@@ -21,8 +21,7 @@ class TenantMap
     {
         $this->TENANTS = Config::get('tenant') ?? [];
 
-        foreach ($this->TENANTS as $index => $tenant) {
-            $key = $this->CONFIG_PREFIX . $index;
+        foreach ($this->TENANTS as $key => $tenant) {
             if (!empty($tenant['db'])) {
                 Config::set("database.connections.{$key}", $tenant['db']);
             }
@@ -45,7 +44,12 @@ class TenantMap
         $this->CURRENT = $index;
     }
 
-    protected function currentFilesystem()
+    /**
+     * Get the current filesystem disk
+     *
+     * @return string The filesystem disk to use with Storage::disk()
+     */
+    public function currentFilesystem(): string
     {
         if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['filesystem'])) {
             return $this->CONFIG_PREFIX . $this->CURRENT;
@@ -54,7 +58,12 @@ class TenantMap
         }
     }
 
-    protected function currentDb()
+    /**
+     * Get the current database
+     *
+     * @return string The filesystem disk to use with Storage::disk()
+     */
+    public function currentDb(): string
     {
         if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['db'])) {
             return $this->CONFIG_PREFIX . $this->CURRENT;
@@ -69,8 +78,15 @@ class TenantMap
      *
      * @return Array list of connections
      */
-    public function getConnections()
+    public function getDbs()
     {
-        return $this->CONNECTIONS;
+        $dbs = [];
+        foreach ($this->TENANTS as $index => $tenant) {
+            if (!empty($tenant['db'])) {
+                $dbs[] = $index;
+            }
+        }
+
+        return $dbs;
     }
 }

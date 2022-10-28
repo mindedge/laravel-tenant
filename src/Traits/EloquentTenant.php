@@ -4,7 +4,7 @@ namespace Windward\LaravelTenant\Traits;
 
 use Windward\LaravelTenant\LaravelTenantFacade;
 
-trait Tenant
+trait EloquentTenant
 {
     public function __construct(array $attributes = array())
     {
