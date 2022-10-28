@@ -7,38 +7,62 @@
 
 namespace Windward\LaravelTenant;
 
+use Exception;
 use Illuminate\Support\Facades\Config;
 
 class TenantMap
 {
-    private $CONNECTIONS = [];
+    private $TENANTS = [];
 
     private $CURRENT = null;
-    private $CONNECTION_PREFIX = "tenant.";
+    private $CONFIG_PREFIX = "tenant.";
 
     public function __construct()
     {
-        $tenants = Config::get('tenant') ?? [];
+        $this->TENANTS = Config::get('tenant') ?? [];
 
-        foreach ($tenants as $index => $tenant) {
+        foreach ($this->TENANTS as $index => $tenant) {
+            $key = $this->CONFIG_PREFIX . $index;
             if (!empty($tenant['db'])) {
-                $key = $this->CONNECTION_PREFIX . $index;
-                $this->CONNECTIONS[] = $key;
-
                 Config::set("database.connections.{$key}", $tenant['db']);
+            }
+
+            if (!empty($tenant['filesystem'])) {
+                Config::set("filesystems.disks.{$key}", $tenant['filesystem']);
             }
         }
     }
 
-    public function setCurrent($key)
+    /**
+     * Sets the current tenant index
+     *
+     * @param int $index the current tenant index
+     *
+     * @return void
+     */
+    public function setCurrent(int $index): void
     {
-        $this->CURRENT = $key;
+        $this->CURRENT = $index;
     }
 
-    public function getCurrent()
+    protected function currentFilesystem()
     {
-        return $this->CURRENT;
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['filesystem'])) {
+            return $this->CONFIG_PREFIX . $this->CURRENT;
+        } else {
+            throw new Exception("No filesystem exists for tenant index {$this->CURRENT}");
+        }
     }
+
+    protected function currentDb()
+    {
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['db'])) {
+            return $this->CONFIG_PREFIX . $this->CURRENT;
+        } else {
+            throw new Exception("No filesystem exists for tenant index {$this->CURRENT}");
+        }
+    }
+
 
     /**
      * Get a list of all user database connection keys for eloquent on() statements

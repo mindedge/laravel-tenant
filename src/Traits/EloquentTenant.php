@@ -2,13 +2,13 @@
 
 namespace Windward\LaravelTenant\Traits;
 
-use Windward\EloquentTenant\EloquentTenantFacade;
+use Windward\LaravelTenant\LaravelTenantFacade;
 
 trait Tenant
 {
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
-        $this->connection = LaravelTenantFacade::getCurrent();
+        $this->connection = LaravelTenantFacade::currentDb();
     }
 }

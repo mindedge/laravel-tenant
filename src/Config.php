@@ -27,11 +27,11 @@ class Config
         // Load in the database tenant config
         while (!empty(env("TENANT_{$index}_FILESYSTEM_DRIVER"))) {
             if (trim(env("TENANT_{$index}_FILESYSTEM_DRIVER")) === 's3') {
-                $config["tenant_{$index}"] = [
+                $config["tenant.{$index}"] = [
                     "filesystem" => self::loadFilesystemS3($index)
                 ];
             } else if (trim(env("TENANT_{$index}_FILESYSTEM_DRIVER")) === 'local') {
-                $config["tenant_{$index}"] = [
+                $config["tenant.{$index}"] = [
                     "filesystem" => self::loadFilesystemLocal($index)
                 ];
             }
@@ -74,7 +74,7 @@ class Config
 
         // Load in the database tenant config
         while (!empty(env("TENANT_{$index}_DB_HOST"))) {
-            $config["tenant_{$index}"] = [
+            $config["tenant.{$index}"] = [
                 "db" => [
                     'driver' => env("TENANT_{$index}_DB_DRIVER", "pgsql"),
                     'url' => env("TENANT_{$index}_DATABASE_URL"),
