@@ -1,6 +1,6 @@
 <?php
 
-namespace Windward\LaravelTenant;
+namespace MindEdge\LaravelTenant;
 
 use Illuminate\Support\Facades\Facade;
 

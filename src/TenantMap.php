@@ -5,7 +5,7 @@
  *
  */
 
-namespace Windward\LaravelTenant;
+namespace MindEdge\LaravelTenant;
 
 use Exception;
 use Illuminate\Support\Facades\Config;

@@ -5,7 +5,7 @@
  *
  */
 
-namespace Windward\LaravelTenant;
+namespace MindEdge\LaravelTenant;
 
 class Config
 {

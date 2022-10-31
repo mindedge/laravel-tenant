@@ -1,8 +1,8 @@
 <?php
 
-namespace Windward\LaravelTenant\Traits;
+namespace MindEdge\LaravelTenant\Traits;
 
-use Windward\LaravelTenant\LaravelTenantFacade;
+use MindEdge\LaravelTenant\LaravelTenantFacade;
 
 trait EloquentTenant
 {
