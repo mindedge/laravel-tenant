@@ -1,8 +1,4 @@
-# Very short description of the package
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mindedge/eloquent-tenant.svg?style=flat-square)](https://packagist.org/packages/mindedge/eloquent-tenant)
-[![Total Downloads](https://img.shields.io/packagist/dt/mindedge/eloquent-tenant.svg?style=flat-square)](https://packagist.org/packages/mindedge/eloquent-tenant)
-![GitHub Actions](https://github.com/mindedge/eloquent-tenant/actions/workflows/main.yml/badge.svg)
+# Laravel Tenant
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
@@ -40,8 +36,8 @@ If you discover any security related issues, please email jrogaishio@mindedge.co
 
 ## Credits
 
--   [Jacob Rogaishio](https://github.com/mindedge)
--   [All Contributors](../../contributors)
+- [Jacob Rogaishio](https://github.com/mindedge)
+- [All Contributors](../../contributors)
 
 ## License
 

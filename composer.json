@@ -1,8 +1,8 @@
 {
-  "name": "windward/laravel-tenant",
+  "name": "mindedge/laravel-tenant",
   "description": "Simple trait to enable multi-tenant models",
   "keywords": [
-    "windward",
+    "mindedge",
     "laravel",
     "laravel-tenant"
   ],
@@ -25,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Windward\\LaravelTenant\\": "src"
+      "MindEdge\\LaravelTenant\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Windward\\LaravelTenant\\Tests\\": "tests"
+      "MindEdge\\LaravelTenant\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -43,7 +43,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Windward\\LaravelTenant\\LaravelTenantServiceProvider"
+        "MindEdge\\LaravelTenant\\LaravelTenantServiceProvider"
       ]
     }
   }
