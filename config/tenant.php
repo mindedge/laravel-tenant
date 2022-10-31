@@ -1,5 +1,5 @@
 <?php
 
-use Windward\LaravelTenant\Config;
+use MindEdge\LaravelTenant\Config;
 
 return Config::load();
