@@ -73,7 +73,7 @@ class Config
         $config = [];
 
         // Load in the database tenant config
-        while (!empty(env("TENANT_{$index}_DB_HOST"))) {
+        while (!empty(env("TENANT_{$index}_DB_DRIVER"))) {
             $config["tenant.{$index}"] = [
                 "db" => [
                     'driver' => env("TENANT_{$index}_DB_DRIVER", "pgsql"),
