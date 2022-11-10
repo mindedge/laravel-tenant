@@ -82,6 +82,15 @@ class TenantMap
         }
     }
 
+    /**
+     * Get the raw tenants array
+     *
+     * @return Array list of connections
+     */
+    public function getTenants()
+    {
+        return $this->TENANTS;
+    }
 
     /**
      * Get a list of all user database connection keys for eloquent on() statements
