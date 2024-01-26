@@ -1,52 +1,95 @@
 <?php
+
 /**
  * Tenancy on eloquent
  *
  */
-namespace Windward\EloquentTenant;
 
+namespace MindEdge\LaravelTenant;
+
+use Exception;
 use Illuminate\Support\Facades\Config;
 
-Class TenantMap {
-    private $DRIVER = 'pgsql';
+class TenantMap
+{
+    private $TENANTS = [];
 
-    //Resolve .env strings into arrays
-    private $USER_HOSTS = [];
-    private $USER_PORTS = [];
-    private $USER_DATABASES = [];
-    private $USER_USERNAMES = [];
-    private $USER_PASSWORDS = [];
+    private $CURRENT = 0;
+    private $CONFIG_PREFIX = "tenant.";
 
-    private $CURRENT = null;
-    private $CONNECTION_PREFIX = "users.";
-
-    public function __construct( )
+    public function __construct()
     {
-        $this->DRIVER = \Config::get('database.default');
+        $this->TENANTS = Config::get('tenant') ?? [];
 
-        // Resolve .env strings into arrays
-        $this->USER_HOSTS = array_map('trim', explode(',', \Config::get('app.userdb.host')));
-        $this->USER_PORTS = array_map('trim', explode(',', \Config::get('app.userdb.port')));
-        $this->USER_DATABASES = array_map('trim', explode(',',\Config::get('app.userdb.database')));
-        $this->USER_USERNAMES = array_map('trim', explode(',', \Config::get('app.userdb.username')));
-        $this->USER_PASSWORDS = array_map('trim', explode(',', \Config::get('app.userdb.password')));
+        foreach ($this->TENANTS as $key => $tenant) {
+            if (!empty($tenant['db'])) {
+                Config::set("database.connections.{$key}", $tenant['db']);
+            }
 
-        $connections = $this->configDatabase();
-
-        // Add new user database connections at runtime
-        foreach($connections as $key => $connection) {
-
-            Config::set("database.connections.{$key}", $connection);
-            //DB::purge($key);
+            if (!empty($tenant['filesystem'])) {
+                Config::set("filesystems.disks.{$key}", $tenant['filesystem']);
+            }
         }
     }
 
-    public function setCurrent($key) {
-        $this->CURRENT = $key;
+    /**
+     * Gets the current tenant index
+     *
+     * @return int
+     */
+    public function getCurrent(): int|null
+    {
+        return $this->CURRENT;
     }
 
-    public function getCurrent() {
-        return $this->CURRENT;
+    /**
+     * Sets the current tenant index
+     *
+     * @param int $index the current tenant index
+     *
+     * @return void
+     */
+    public function setCurrent(int $index): void
+    {
+        $this->CURRENT = $index;
+    }
+
+    /**
+     * Get the current filesystem disk
+     *
+     * @return string The filesystem disk to use with Storage::disk()
+     */
+    public function currentFilesystem(): string
+    {
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['filesystem'])) {
+            return $this->CONFIG_PREFIX . $this->CURRENT;
+        } else {
+            throw new Exception("No filesystem exists for tenant index {$this->CURRENT}");
+        }
+    }
+
+    /**
+     * Get the current database
+     *
+     * @return string The filesystem disk to use with Storage::disk()
+     */
+    public function currentDb(): string
+    {
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['db'])) {
+            return $this->CONFIG_PREFIX . $this->CURRENT;
+        } else {
+            throw new Exception("No database exists for tenant index {$this->CURRENT}");
+        }
+    }
+
+    /**
+     * Get the raw tenants array
+     *
+     * @return Array list of connections
+     */
+    public function getTenants()
+    {
+        return $this->TENANTS;
     }
 
     /**
@@ -54,39 +97,32 @@ Class TenantMap {
      *
      * @return Array list of connections
      */
-    public function getConnections() {
-        $connections = array_map(function($host) {
-            return "{$this->CONNECTION_PREFIX}" . sha1($host);
-        }, $this->USER_HOSTS);
+    public function getDbs()
+    {
+        $dbs = [];
+        foreach ($this->TENANTS as $index => $tenant) {
+            if (!empty($tenant['db'])) {
+                $dbs[] = $index;
+            }
+        }
 
-        return $connections;
+        return $dbs;
     }
 
     /**
-     * Configure a list of all user database connection arrays for database config file
+     * Get a list of all filesystem keys for Storage disk() statements
      *
-     * @return Array list of connections
+     * @return Array list of filesystems
      */
-    public function configDatabase() {
-
-        $USER_CONNECTIONS = [];
-
-        foreach($this->USER_HOSTS as $key => $HOST) {
-            $USER_CONNECTIONS[$this->CONNECTION_PREFIX . sha1($HOST)] = [
-                'driver' => $this->DRIVER,
-                'host' => $HOST,
-                'port' => $this->USER_PORTS[$key],
-                'database' => $this->USER_DATABASES[$key],
-                'username' => $this->USER_USERNAMES[$key],
-                'password' => $this->USER_PASSWORDS[$key],
-                'charset' => 'utf8',
-                'prefix' => '',
-                'prefix_indexes' => true,
-                'schema' => 'public',
-                'sslmode' => 'prefer',
-            ];
+    public function getFilesystems()
+    {
+        $dbs = [];
+        foreach ($this->TENANTS as $index => $tenant) {
+            if (!empty($tenant['filesystem'])) {
+                $dbs[] = $index;
+            }
         }
 
-        return $USER_CONNECTIONS;
+        return $dbs;
     }
 }

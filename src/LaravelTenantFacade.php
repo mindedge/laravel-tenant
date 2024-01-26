@@ -1,10 +1,10 @@
 <?php
 
-namespace Windward\EloquentTenant;
+namespace MindEdge\LaravelTenant;
 
 use Illuminate\Support\Facades\Facade;
 
-class EloquentTenantFacade extends Facade
+class LaravelTenantFacade extends Facade
 {
     /**
      * Get the registered name of the component.
