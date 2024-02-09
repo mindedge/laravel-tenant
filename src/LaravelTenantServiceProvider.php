@@ -12,7 +12,7 @@ class LaravelTenantServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/tenant.php' => config_path('tenant.php'),
+            __DIR__.'/../config/tenant.php' => config_path('tenant.php'),
         ]);
     }
 
@@ -22,7 +22,7 @@ class LaravelTenantServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/tenant.php',
+            __DIR__.'/../config/tenant.php',
             'tenant'
         );
 

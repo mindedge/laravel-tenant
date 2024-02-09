@@ -2,7 +2,6 @@
 
 /**
  * Tenancy on eloquent
- *
  */
 
 namespace MindEdge\LaravelTenant;
@@ -11,7 +10,6 @@ class Config
 {
     public static function load()
     {
-
         $config = [];
 
         $config = array_merge_recursive($config, self::loadDb(), self::loadFilesystem());
@@ -28,11 +26,11 @@ class Config
         while (!empty(env("TENANT_{$index}_FILESYSTEM_DRIVER"))) {
             if (trim(env("TENANT_{$index}_FILESYSTEM_DRIVER")) === 's3') {
                 $config["tenant.{$index}"] = [
-                    "filesystem" => self::loadFilesystemS3($index)
+                    'filesystem' => self::loadFilesystemS3($index),
                 ];
-            } else if (trim(env("TENANT_{$index}_FILESYSTEM_DRIVER")) === 'local') {
+            } elseif (trim(env("TENANT_{$index}_FILESYSTEM_DRIVER")) === 'local') {
                 $config["tenant.{$index}"] = [
-                    "filesystem" => self::loadFilesystemLocal($index)
+                    'filesystem' => self::loadFilesystemLocal($index),
                 ];
             }
 
@@ -61,7 +59,7 @@ class Config
         return [
             'driver' => 'local',
             'root' => env("TENANT_{$index}_FILESYSTEM_ROOT", storage_path('app/public')),
-            'url' => env("TENANT_{$index}_FILESYSTEM_URL", env('APP_URL') . '/storage'),
+            'url' => env("TENANT_{$index}_FILESYSTEM_URL", env('APP_URL').'/storage'),
             'visibility' => env("TENANT_{$index}_FILESYSTEM_VISIBILITY", 'public'),
             'throw' => env("TENANT_{$index}_FILESYSTEM_THROW", false),
         ];
@@ -75,8 +73,8 @@ class Config
         // Load in the database tenant config
         while (!empty(env("TENANT_{$index}_DB_DRIVER"))) {
             $config["tenant.{$index}"] = [
-                "db" => [
-                    'driver' => env("TENANT_{$index}_DB_DRIVER", "pgsql"),
+                'db' => [
+                    'driver' => env("TENANT_{$index}_DB_DRIVER", 'pgsql'),
                     'url' => env("TENANT_{$index}_DATABASE_URL"),
                     'host' => env("TENANT_{$index}_DB_HOST", '127.0.0.1'),
                     'port' => env("TENANT_{$index}_DB_PORT", '5432'),
@@ -88,7 +86,7 @@ class Config
                     'prefix_indexes' => env("TENANT_{$index}_DB_PREFIX_INDEXES", true),
                     'schema' => env("TENANT_{$index}_DB_SCHEMA", 'public'),
                     'sslmode' => env("TENANT_{$index}_DB_SSLMODE", 'prefer'),
-                ]
+                ],
             ];
 
             $index++;

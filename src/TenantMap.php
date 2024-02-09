@@ -2,7 +2,6 @@
 
 /**
  * Tenancy on eloquent
- *
  */
 
 namespace MindEdge\LaravelTenant;
@@ -15,7 +14,8 @@ class TenantMap
     private $TENANTS = [];
 
     private $CURRENT = 0;
-    private $CONFIG_PREFIX = "tenant.";
+
+    private $CONFIG_PREFIX = 'tenant.';
 
     public function __construct()
     {
@@ -37,7 +37,7 @@ class TenantMap
      *
      * @return int
      */
-    public function getCurrent(): int|null
+    public function getCurrent(): ?int
     {
         return $this->CURRENT;
     }
@@ -46,7 +46,6 @@ class TenantMap
      * Sets the current tenant index
      *
      * @param int $index the current tenant index
-     *
      * @return void
      */
     public function setCurrent(int $index): void
@@ -61,8 +60,8 @@ class TenantMap
      */
     public function currentFilesystem(): string
     {
-        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['filesystem'])) {
-            return $this->CONFIG_PREFIX . $this->CURRENT;
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX.$this->CURRENT]['filesystem'])) {
+            return $this->CONFIG_PREFIX.$this->CURRENT;
         } else {
             throw new Exception("No filesystem exists for tenant index {$this->CURRENT}");
         }
@@ -75,8 +74,8 @@ class TenantMap
      */
     public function currentDb(): string
     {
-        if (!empty($this->TENANTS[$this->CONFIG_PREFIX . $this->CURRENT]['db'])) {
-            return $this->CONFIG_PREFIX . $this->CURRENT;
+        if (!empty($this->TENANTS[$this->CONFIG_PREFIX.$this->CURRENT]['db'])) {
+            return $this->CONFIG_PREFIX.$this->CURRENT;
         } else {
             throw new Exception("No database exists for tenant index {$this->CURRENT}");
         }
@@ -85,7 +84,7 @@ class TenantMap
     /**
      * Get the raw tenants array
      *
-     * @return Array list of connections
+     * @return array list of connections
      */
     public function getTenants()
     {
@@ -95,7 +94,7 @@ class TenantMap
     /**
      * Get a list of all user database connection keys for eloquent on() statements
      *
-     * @return Array list of connections
+     * @return array list of connections
      */
     public function getDbs()
     {
@@ -112,7 +111,7 @@ class TenantMap
     /**
      * Get a list of all filesystem keys for Storage disk() statements
      *
-     * @return Array list of filesystems
+     * @return array list of filesystems
      */
     public function getFilesystems()
     {
