@@ -2,10 +2,13 @@
 
 namespace MindEdge\LaravelTenant\Traits;
 
+use Illuminate\Notifications\HasDatabaseNotifications;
 use MindEdge\LaravelTenant\Models\TenantDatabaseNotification;
 
 trait HasDatabaseNotificationsTenant
 {
+    use HasDatabaseNotifications;
+
     /**
      * Get the entity's notifications.
      *
